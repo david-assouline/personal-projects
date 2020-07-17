@@ -5,6 +5,10 @@ possible_results = ["You win!", "Computer wins!", "Draw"]
 def player_choice():
     player_choice = int(input("Please make your selection:\n1.\t{}\n2.\t{}\n3.\t{}\n\nSelection --> "
                               .format(options[0],options[1],options[2])))
+    while player_choice < 1 or player_choice > 3:
+        print("Invalid selection. Choose a value between 1 and 3")
+        player_choice = int(input("Please make your selection:\n1.\t{}\n2.\t{}\n3.\t{}\n\nSelection --> "
+                                  .format(options[0],options[1],options[2])))
     player_choice = options[player_choice - 1]
     return(player_choice)
 
@@ -36,4 +40,3 @@ while True:
     print("")
     input("Are you ready for the next round? --> (enter)")
     continue
-
