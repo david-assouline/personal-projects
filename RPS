@@ -1,18 +1,13 @@
 import random
 options = ["Rock", "Paper", "Scissors"]
-
-player_choice = int(input("Please make your selection:\n\n1.\t{}\n2.\t{}\n3.\t{}\n\nSelection --> "
-                      .format(options[0],options[1],options[2])))
-
-player_choice = options[player_choice - 1]
-computer_choice = random.choice(options)
-
-print("")
-print("You chose {}".format(player_choice))
-print("CPU chose {}".format(computer_choice))
-print("")
-
 possible_results = ["You win!", "Computer wins!", "Draw"]
+
+def player_choice():
+    player_choice = int(input("Please make your selection:\n1.\t{}\n2.\t{}\n3.\t{}\n\nSelection --> "
+                              .format(options[0],options[1],options[2])))
+    player_choice = options[player_choice - 1]
+    return(player_choice)
+
 
 def rock_paper_scissors(player_choice, computer_choice):
     result = "undefined"
@@ -34,11 +29,11 @@ def rock_paper_scissors(player_choice, computer_choice):
         result = possible_results[2]
     elif player_choice == options[2] and computer_choice == options[0]:
         result = possible_results[1]
-    return result
+    return ("You chose: {}\nCPU chose: {}\nResult: {}".format(player_choice,computer_choice,result))
 
-print(rock_paper_scissors(player_choice,computer_choice))
-
-
-
-
+while True:
+    print(rock_paper_scissors(player_choice(),random.choice(options)))
+    print("")
+    input("Are you ready for the next round? --> (enter)")
+    continue
 
