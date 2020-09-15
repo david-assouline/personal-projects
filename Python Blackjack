@@ -1,0 +1,89 @@
+import random
+
+cards = {'A of spade': 1, '2 of spade':2, '3 of spade':3, '4 of spade':4, '5 of spade':5, '6 of spade':6, '7 of spade':7,
+         '8 of spade':8,'9 of spade':9, '10 of spade':10, 'J of spade':10, 'Q of spade':10, 'K of spade':10, 'A of club':1,
+         '2 of club':2, '3 of club':3,'4 of club':4, '5 of club':5, '6 of club':6, '7 of club':7, '8 of club':8, '9 of club':9,
+         '10 of club':10, 'J of club':10,'Q of club':10, 'K of club':10, 'A of heart':1, '2 of heart':2, '3 of heart':3,
+         '4 of heart':4, '5 of heart':5, '6 of heart':6,'7 of heart':7, '8 of heart':8, '9 of heart':9, '10 of heart':10,
+         'J of heart':10, 'Q of heart':10, 'K of heart':10,'A of diamond':1, '2 of diamond':2, '3 of diamond':3,
+         '4 of diamond':4, '5 of diamond':5, '6 of diamond':6, '7 of diamond':7,'8 of diamond':8, '9 of diamond':9,
+         '10 of diamond':10, 'J of diamond':10, 'Q of diamond':10, 'K of diamond':10}
+
+def deal_initial_cards():
+    player_one_cards.append(keys.pop())
+    dealer_cards.append(keys.pop())
+    player_one_cards.append(keys.pop())
+    dealer_cards.append(keys.pop())
+    print("You've been dealt: [{}] and [{}]".format(player_one_cards[0], player_one_cards[1]))
+    print("Dealer is showing: [{}]\nPlayer 1: {}\nDealer: {}".format(dealer_cards[0],player_one_count(),cards[dealer_cards[0]]))
+
+def player_one_turn():
+    while True:
+        if player_one_count() <= 21:
+            player_choice = input("Press H to hit or S to stand: ")
+            if player_choice.lower() == "h":
+                player_one_cards.append(keys.pop())
+                print("You've been dealt: [{}]".format(player_one_cards[-1]))
+                if player_one_count() <= 21:
+                    print("Player 1: {}".format(player_one_count()))
+            elif player_choice.lower() == "s":
+                break
+        if player_one_count() > 21:
+            break
+
+def dealer_turn():
+    print("Dealer drew: [{}] --> {}".format(dealer_cards[1],dealer_count()))
+    while dealer_count() <= 16:
+        dealer_cards.append(keys.pop())
+        print("Dealer drew: [{}] --> {}".format(dealer_cards[-1],dealer_count()))
+
+def player_one_count():
+    player_one = 0
+    global player_one_cards
+    for i in player_one_cards:
+        player_one += cards[i]
+    return(player_one)
+
+def dealer_count():
+    dealer = 0
+    global dealer_cards
+    for i in dealer_cards:
+        dealer += cards[i]
+    return(dealer)
+
+def results():
+    print("Player 1: {}".format(player_one_count()))
+    print("Dealer: {}".format(dealer_count()))
+    if player_one_count() > 21:
+        print("Player 1 busts, Dealer wins!")
+    elif dealer_count() > 21:
+        print("Dealer busts, Player 1 wins!")
+    if player_one_count() <= 21 and dealer_count() <= 21:
+        if player_one_count() > dealer_count():
+            print("Player 1 wins!")
+        elif dealer_count() > player_one_count():
+            print("Dealer wins!")
+        elif player_one_count() == dealer_count():
+            print("It's a draw!")
+
+
+while True:
+    keys = list(cards.keys())
+    random.shuffle(keys)
+    player_one_cards = []
+    dealer_cards = []
+
+    deal_initial_cards()
+    # if player_one_count() == 21 and dealer_count() == 21:
+    #     print
+    player_one_turn()
+    if player_one_count() <= 21:
+        dealer_turn()
+    results()
+    print("")
+    input("New Game? ")
+
+
+
+
+
